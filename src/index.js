@@ -60,9 +60,9 @@ const parseExtensions = () => {
       files.openZip(cli.input).then((zipfile) => {
         for (let file in zipfile.files) {
           zipfile.files[file].async('text').then((text) => {
-            try {
-              extension.getUrls(text).forEach((url) => {
-                try {
+
+            extension.getUrls(text).forEach((url) => {
+              try {
                 extension.getFileType(url).then((mime) => {
                   csp.push({ url, mime });
                   resolve(csp);
@@ -70,10 +70,8 @@ const parseExtensions = () => {
               } catch (error) {
                 err(`Can't parse: `, url);
               }
-              });
-            } catch (error) {
-              err(`Can't parse: `, url);
-            }
+            });
+
           });
         }
       });
@@ -112,8 +110,6 @@ if (cli.flags.upload) {
 
 //com.createCsp('test');
 
-const baseUrl = 'https://tenant-onboarding.us.qlik-stage.com/';
-const action = 'api/v1/apps/414ab903-5a5d-4962-a846-acd3eb584e85';
 const url = baseUrl + action;
 //com.getData(url);
 

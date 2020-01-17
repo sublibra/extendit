@@ -1,8 +1,5 @@
 let axios = require('axios');
 
-const key = 'eyJhbGciOiJFUzM4NCIsImtpZCI6IjRkMzMzNGFiLTVjMTItNGQ0MC1iZDlhLTdjZDdkZDZjOGI3OCIsInR5cCI6IkpXVCJ9.eyJzdWJUeXBlIjoidXNlciIsInRlbmFudElkIjoiYk9vd0hpNnB4bjBHYVVjWEluYTRvRmNvNjJhZzl1b0giLCJqdGkiOiI0ZDMzMzRhYi01YzEyLTRkNDAtYmQ5YS03Y2Q3ZGQ2YzhiNzgiLCJhdWQiOiJxbGlrLmFwaSIsImlzcyI6InFsaWsuYXBpL2FwaS1rZXlzIiwic3ViIjoidXIwX0hGR3Mtc3Fjd2RfSUx4Y1lBT1dXX1dmRVJjTFQifQ.HWddQqHQ7cOkxz_0JqD2l3GVkhoAx9UqT56uHihTVFcLfY7uRu3JlR1ipz-Fq8AKvGA2xH6rSOiS49srz16hEJj654p7Tzyo8QRvodwIkQQzFVzchnTUmvgdt7UarpYm';
-const tenantUrl = 'https://rd-33136.qliktech.com/';
-
 const validURL = str => {
   var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -24,7 +21,7 @@ const getData = async url => {
 
 const createCsp = async (cspEntry) => {
   try {
-    const baseUrl = 'https://rd-33136.qliktech.com/v1/csp-header';
+    const baseUrl = '';
     const action = 'api/v1/csp-header';
     const url = baseUrl + action;
     const response = await axios.post(url, {
