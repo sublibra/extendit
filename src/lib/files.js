@@ -1,7 +1,6 @@
 const fs = require('fs');
 const JSZip = require('jszip');
 const path = require('path');
-const unzip = require('node-unzip-2');
 
 module.exports = {
   getCurrentDirectoryBase: () => {
