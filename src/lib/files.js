@@ -15,7 +15,7 @@ module.exports = {
     return new JSZip.external.Promise((resolve, reject) => {
       fs.readFile(fileName[0], (err, data) => {
         if (err) {
-          reject(e);
+          reject(err);
         } else {
           resolve(JSZip.loadAsync(data));
         }
