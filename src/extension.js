@@ -7,7 +7,6 @@ const getUrls = file => {
 }
 
 const getFileType = (url) => {
-  console.log(url);
   const stream = got.stream(url);
 	return FileType.fromStream(stream);
 };

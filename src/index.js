@@ -21,13 +21,18 @@ const cli = meow(`
       $ extendit <extension>
 
       Options
-       --apikey, -a API key used to communicate with Qlik Cloud 
+       --apikey, -k API key used to communicate with Qlik Cloud 
        --csp, -c Search for CSP 
        --upload, -u Upload the extension to 
        --unicorn prints a rainbows and unicorns for your effort
 `, {
   booleanDefault: undefined,
   flags: {
+    key: {
+      type: 'string',
+      default: '',
+      alias: 'k'
+    },
     csp: {
       type: 'boolean',
       default: false,
@@ -50,6 +55,11 @@ const err = (desc, error) => {
   process.exit(1)
 }
 
+const info = (desc, data='', data2='') => {
+  console.log(chalk.white(desc), chalk.greenBright(data),
+  chalk.greenBright(data2));
+}
+
 
 const parseExtensions = () => {
   // Find all urls in all files in the extension zip
@@ -64,6 +74,7 @@ const parseExtensions = () => {
             extension.getUrls(text).forEach((url) => {
               try {
                 extension.getFileType(url).then((mime) => {
+                  info('New url found: ', url, JSON.stringify(mime))
                   csp.push({ url, mime });
                   resolve(csp);
                 });
@@ -90,26 +101,21 @@ if (cli.flags.unicorn) {
 
 // Extension file
 if (cli.input != '') {
+  info('Parsing:', cli.input);
   parseExtensions().then((csp) => {
-    console.log(csp);
   });
-
 } else {
   err('No extension declared')
 }
 
 // upload
 if (cli.flags.upload) {
-  err('Not implemented - upload to', cli.flags.upload);
   if (!com.validURL(cli.flags.upload)) {
     err('Not a valid URL', cli.flags.upload);
   } else {
-    com.uploadExtension(cli.input);
+    info('Uploading the extension to:', cli.flags.upload);
+    com.uploadExtension(cli.flags.upload, cli.flags.key, files.getFile(cli.input[0])).then( (res) => {
+      //console.log(res.status);
+    });
   }
 }
-
-//com.createCsp('test');
-
-const url = baseUrl + action;
-//com.getData(url);
-

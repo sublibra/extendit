@@ -7,6 +7,13 @@ module.exports = {
     return path.basename(process.cwd());
   },
 
+  getFile: (fileName) => {
+    if (!fs.existsSync(fileName)) {
+      throw `File doesn't exists: ` + fileName;
+    };
+    return fs.readFileSync(fileName);
+  },
+
   openZip: (fileName) => {
     if (!fs.existsSync(fileName[0])) {
       throw `File doesn't exists`;
